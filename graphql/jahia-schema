@@ -1,0 +1,31 @@
+module.exports = {
+  uri: 'http://localhost:8080/modules/graphql',
+  headers: {
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwOi8vamFoaWEuY29tIiwic3ViIjoiYXBpIHZlcmlmaWNhdGlvbiIsImlzcyI6ImR4Iiwic2NvcGVzIjpbImRldmVsb3BlciJdLCJpYXQiOjE1NjQ1ODgzNzEsImp0aSI6ImMxZmRhMjIwLWI1ZjctNDljMC05ZWE2LWFjNzVhOGMzZGZjMCJ9.14sTk0bAIEfZ6k2xux-m_y_7RX2cewbo2BB_LpSd1O4'
+  },
+
+  typeDefs: `
+    type Metadata {
+        created : String
+        createdBy : String 
+        lastModified : String 
+        lastModifiedBy : String 
+        lastPublished : String
+        lastPublishedBy : String
+    }
+
+    type NewsEntry {
+	    metadata: Metadata 
+	    body: String
+	    title: String
+    }
+
+    type Query {
+	    allNews: [NewsEntry]
+    }
+  `,
+};
+
+// headers: {
+//    authorization: 'secret',
+//  },
