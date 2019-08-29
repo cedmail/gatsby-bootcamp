@@ -4,40 +4,40 @@
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
+require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`
+});
 
 module.exports = {
-  /* Your site config here */
+    /* Your site config here */
     siteMetadata: {
-      title:'My Gatsby Site',
-      author: 'Ced'
+        title: 'My Gatsby Site',
+        author: 'Ced'
     },
-    plugins : [
+    plugins: [
         'gatsby-plugin-sass',
         // 'gatsby-source-jahia',
         // {
         //   resolve: 'gatsby-source-modular-graphql',
         //   options: {
         //     path: './graphql',
-        //     schemaModules:['jahia-schema']                
+        //     schemaModules:['jahia-schema']
         //   },
         // },
         {
-          resolve: "gatsby-source-graphql",
-          options: {
-            // This type will contain remote schema Query type
-            typeName: "JAHIA",
-            // This is the field under which it's accessible
-            fieldName: "jahia",
-            // URL to query from
-            url: "http://localhost:8080/modules/graphql",
-            headers: {
-              'Authorization': `Bearer ${process.env.JAHIA_TOKEN}`
-            },
-            refetchInterval: 10,
-          },
-        },
+            resolve: 'gatsby-source-graphql',
+            options: {
+                // This type will contain remote schema Query type
+                typeName: 'JAHIA',
+                // This is the field under which it's accessible
+                fieldName: 'jahia',
+                // URL to query from
+                url: `${process.env.JAHIA_URL}/modules/graphql`,
+                headers: {
+                    'Authorization': `Bearer ${process.env.JAHIA_TOKEN}`
+                },
+                refetchInterval: 10
+            }
+        }
     ]
 };

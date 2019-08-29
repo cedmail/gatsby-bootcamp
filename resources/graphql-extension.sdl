@@ -1,0 +1,22 @@
+type NewsEntry @mapping(node: "jnt:news") {
+	metadata: Metadata 
+	body: String @mapping(property: "desc")
+	title: String @mapping(property: "jcr:title")
+	image: ImageAsset @mapping(property: "image")
+}
+type Company @mapping(node: "jdnt:company") {
+	metadata: Metadata 
+	logo: ImageAsset @mapping(property: "logo")
+	name: String @mapping(property: "jcr:title")
+	headline: String @mapping(property: "headline")
+	overview: String @mapping(property: "overview")
+	website: String @mapping(property: "website")
+	industry: Category @mapping(property: "industryCat")
+	banner: ImageAsset @mapping(property: "bannerImg")
+	thumbnail: ImageAsset @mapping(property: "thumbnail")
+}
+
+extend type Query {
+	allNews: [NewsEntry]
+	companiesByIndustry: [Company]
+}

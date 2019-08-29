@@ -1,6 +1,6 @@
-const path = require(`path`)
-exports.createPages = async ({ actions, graphql }) => {
-  const {data} = await graphql(`
+const path = require(`path`);
+exports.createPages = async ({actions, graphql}) => {
+    const {data} = await graphql(`
     query {
         jahia {
             allNews {
@@ -17,32 +17,32 @@ exports.createPages = async ({ actions, graphql }) => {
             }
         }
     }
-  `)
-  data.jahia.allNews.forEach(({ uuid, title }) => {
-    actions.createPage({
-      path: title.toLowerCase().replace(/\s/g,""),
-      component: path.resolve(`./src/components/news.js`),
-      context: {
-        newsId: uuid,
-      },
-    })
-  })
-  data.jahia.media.forEach(({ uuid, name }) => {
-    actions.createPage({
-      path: name.toLowerCase().replace(/\s/g,""),
-      component: path.resolve(`./src/components/company.js`),
-      context: {
-        companyId: uuid,
-      },
-    })
-  })
-  data.jahia.retail.forEach(({ uuid, name }) => {
-    actions.createPage({
-      path: name.toLowerCase().replace(/\s/g,""),
-      component: path.resolve(`./src/components/company.js`),
-      context: {
-        companyId: uuid,
-      },
-    })
-  })
-}
+  `);
+    data.jahia.allNews.forEach(({uuid, title}) => {
+        actions.createPage({
+            path: title.toLowerCase().replace(/\s/g, ''),
+            component: path.resolve(`./src/components/news.js`),
+            context: {
+                newsId: uuid
+            }
+        });
+    });
+    data.jahia.media.forEach(({uuid, name}) => {
+        actions.createPage({
+            path: name.toLowerCase().replace(/\s/g, ''),
+            component: path.resolve(`./src/components/company.js`),
+            context: {
+                companyId: uuid
+            }
+        });
+    });
+    data.jahia.retail.forEach(({uuid, name}) => {
+        actions.createPage({
+            path: name.toLowerCase().replace(/\s/g, ''),
+            component: path.resolve(`./src/components/company.js`),
+            context: {
+                companyId: uuid
+            }
+        });
+    });
+};
