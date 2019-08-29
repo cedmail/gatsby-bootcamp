@@ -1,0 +1,35 @@
+package org.jahia.modules.formfactory.elasticsearch.rules
+
+import org.jahia.services.content.rules.*
+import org.jahia.services.content.JCRContentUtils
+import org.slf4j.Logger
+import java.net.HttpURLConnection
+import java.net.URL
+import java.io.UnsupportedEncodingException
+import java.nio.charset.StandardCharsets
+import java.net.MalformedURLException
+import javax.net.ssl.HttpsURLConnection
+
+rule "Deploy on netlify"
+    salience 1
+    when
+        A node is published
+            - the node has the type jnt:news
+            - not in operation import
+    then
+>       try {
+>       System.out.println("Deploying on netlify");
+>       URL netlifyURL = new URL("https://api.netlify.com/build_hooks/....");
+>       System.out.println(netlifyURL);
+>       HttpsURLConnection con = (HttpsURLConnection)netlifyURL.openConnection();
+>       con.setRequestMethod("POST");
+>       con.setRequestProperty("Content-Type", "application/json; utf-8");
+>       con.setRequestProperty("Accept", "application/json");
+>       con.setDoOutput(true);
+>       con.getOutputStream().write("{}".getBytes(StandardCharsets.UTF_8));
+>       con.getOutputStream().flush();
+>       System.out.println("respons from Netlify: " + con.getResponseCode());
+>       } catch (Exception e) {
+>           e.printStackTrace();
+>       }
+end

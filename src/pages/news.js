@@ -30,7 +30,7 @@ export default ({data}) => (
 export const query = graphql`
     query {
         jahia {
-            allNews {
+            allNews(sortBy: {fieldName: "metadata.lastPublished", sortType: DESC}) {
                 title
                 metadata {
                     created

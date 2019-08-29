@@ -11,19 +11,11 @@ require('dotenv').config({
 module.exports = {
     /* Your site config here */
     siteMetadata: {
-        title: 'My Gatsby Site',
-        author: 'Ced'
+        title: 'My Gatsby And Jahia Site',
+        author: 'Cedric Mailleux'
     },
     plugins: [
         'gatsby-plugin-sass',
-        // 'gatsby-source-jahia',
-        // {
-        //   resolve: 'gatsby-source-modular-graphql',
-        //   options: {
-        //     path: './graphql',
-        //     schemaModules:['jahia-schema']
-        //   },
-        // },
         {
             resolve: 'gatsby-source-graphql',
             options: {
@@ -35,8 +27,7 @@ module.exports = {
                 url: `${process.env.JAHIA_URL}/modules/graphql`,
                 headers: {
                     'Authorization': `Bearer ${process.env.JAHIA_TOKEN}`
-                },
-                refetchInterval: 10
+                }
             }
         }
     ]

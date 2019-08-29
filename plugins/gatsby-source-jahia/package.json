@@ -1,7 +1,0 @@
-{
-  "name": "gatsby-source-jahia",
-  "version": "1.0.0",
-  "description": "Gatsby Plugin to use Jahia as a source provider",
-  "main": "index.js",
-  "license": "MIT"
-}
