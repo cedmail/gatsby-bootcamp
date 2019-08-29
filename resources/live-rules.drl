@@ -11,15 +11,37 @@ import java.net.MalformedURLException
 import javax.net.ssl.HttpsURLConnection
 
 rule "Deploy on netlify"
-    salience 1
+    salience 100
     when
         A node is published
-            - the node has the type jnt:news
             - not in operation import
     then
 >       try {
 >       System.out.println("Deploying on netlify");
->       URL netlifyURL = new URL("https://api.netlify.com/build_hooks/....");
+>       URL netlifyURL = new URL("https://api.netlify.com/build_hooks/5d67f5c9105a090a2789a87a");
+>       System.out.println(netlifyURL);
+>       HttpsURLConnection con = (HttpsURLConnection)netlifyURL.openConnection();
+>       con.setRequestMethod("POST");
+>       con.setRequestProperty("Content-Type", "application/json; utf-8");
+>       con.setRequestProperty("Accept", "application/json");
+>       con.setDoOutput(true);
+>       con.getOutputStream().write("{}".getBytes(StandardCharsets.UTF_8));
+>       con.getOutputStream().flush();
+>       System.out.println("respons from Netlify: " + con.getResponseCode());
+>       } catch (Exception e) {
+>           e.printStackTrace();
+>       }
+end
+
+rule "Deploy on netlify upon deletion"
+    salience 100
+    when
+        A node is deleted
+            - not in operation import
+    then
+>       try {
+>       System.out.println("Deploying on netlify");
+>       URL netlifyURL = new URL("https://api.netlify.com/build_hooks/5d67f5c9105a090a2789a87a");
 >       System.out.println(netlifyURL);
 >       HttpsURLConnection con = (HttpsURLConnection)netlifyURL.openConnection();
 >       con.setRequestMethod("POST");
